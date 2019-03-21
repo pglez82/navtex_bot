@@ -1,0 +1,49 @@
+<metareas>
+    <metarea id="I" url="http://weather.gmdss.org/I.html" description="The North Atlantic Ocean east of 35°W, from 48°27'N to 75°N including the North Sea and Baltic Sea sub-area, excluding the area bounded by 65°N to 5°W">
+        <messages>
+            <message id="METAREA1.OFF_SHORE_FORECAST" warning="false">
+                <times>
+		    <time>11:30:00</time>
+                    <time>17:25:00</time>
+                </times>
+            </message>
+            <message id="METAREA1.FORECAST_EAST_GULF_FINLAND" warning="false">
+                <times>
+                    <time>18:00:00</time>
+                </times>
+            </message>
+            <message id="METAREA1.HIGH_SEAS_FORECAST" warning="false">
+                <times>
+                    <time>8:15:00</time>
+		    <time>20:15:00</time>
+                </times>
+            </message>
+        </messages>
+    </metarea>
+    <metarea id="II" url="http://weather.gmdss.org/II.html" description="Atlantic waters east of 35°W, from 7°N to 48°27'N, and east of 20°W from 7°N to 6°S, including the Straits of Gibraltar">
+        <messages>
+            <message id="METAREA2.HIGH_SEAS_FORECAST" warning="false">
+                <times>
+                    <time>10:15:00</time>
+                    <time>22:15:00</time>
+                </times>
+            </message>
+        </messages>
+    </metarea>
+    <metarea id="III" url="http://weather.gmdss.org/III.html" description="The Mediterranean and Black Seas, east of the Straits of Gibraltar">
+        <messages>
+            <message id="METAREA3E.HIGH_SEAS_FORECAST" warning="false">
+                <times>
+                    <time>10:00:00</time>
+                    <time>16:05:00</time>
+                </times>
+            </message>
+            <message id="METAREA3W.HIGH_SEAS_FORECAST" warning="false">
+                <times>
+                    <time>9:00:00</time>
+                    <time>21:00:00</time>
+                </times>
+            </message>
+        </messages>
+    </metarea>
+</metareas>
