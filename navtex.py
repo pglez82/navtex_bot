@@ -92,10 +92,12 @@ class NavtexScrapper:
         """
         raw_html = self.simple_get(url)
         if raw_html != None:
+	    self.logger.info("Getting url for message "+message)
             html = BeautifulSoup(raw_html, 'html.parser')
             link = html.find('a', attrs={'href': re.compile("^bulletins/"+message)})
             linkp=link.get('href')
             bulletinurl = "http://weather.gmdss.org/"+linkp.replace(".html",".txt")
+	    self.logger.info("The url has been obtained for the message: "+bulletinurl+".Downloading...")
             return get(bulletinurl).content.decode('latin1')
         else:
             return None
