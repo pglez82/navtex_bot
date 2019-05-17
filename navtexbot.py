@@ -150,31 +150,35 @@ class NavtexBot:
             message_number = message_number + len(messagecontent)//telegram.constants.MAX_MESSAGE_LENGTH+1
 
     def send_message(self, bot, chat_id, text: str, **kwargs):
-        if len(text) <= telegram.constants.MAX_MESSAGE_LENGTH:
-            return bot.send_message(chat_id, text, **kwargs)
+        try:
+            if len(text) <= telegram.constants.MAX_MESSAGE_LENGTH:
+                return bot.send_message(chat_id, text, **kwargs)
 
-        parts = []
-        while len(text) > 0:
-            if len(text) > telegram.constants.MAX_MESSAGE_LENGTH:
-                part = text[:telegram.constants.MAX_MESSAGE_LENGTH]
-                first_lnbr = part.rfind('\n')
-                if first_lnbr != -1:
-                    parts.append(part[:first_lnbr])
-                    text = text[first_lnbr:]
+            parts = []
+            while len(text) > 0:
+                if len(text) > telegram.constants.MAX_MESSAGE_LENGTH:
+                    part = text[:telegram.constants.MAX_MESSAGE_LENGTH]
+                    first_lnbr = part.rfind('\n')
+                    if first_lnbr != -1:
+                        parts.append(part[:first_lnbr])
+                        text = text[first_lnbr:]
+                    else:
+                        parts.append(part)
+                        text = text[telegram.constants.MAX_MESSAGE_LENGTH:]
                 else:
-                    parts.append(part)
-                    text = text[telegram.constants.MAX_MESSAGE_LENGTH:]
-            else:
-                parts.append(text)
-                break
+                    parts.append(text)
+                    break
 
-        msg = None
-        part_count = 0
-        for part in parts:
-            part_count = part_count + 1
-            self.logger.info("Sending part "+str(part_count)+"to user "+str(chat_id))
-            msg = bot.send_message(chat_id, part, **kwargs)
-        return msg
+            msg = None
+            part_count = 0
+            for part in parts:
+                part_count = part_count + 1
+                self.logger.info("Sending part "+str(part_count)+"to user "+str(chat_id))
+                msg = bot.send_message(chat_id, part, **kwargs)
+            return msg
+        except telegram.error.Unauthorized: #The user might have blocked us
+            self.logger.info("User might have blocked the bot: "+str(chat_id))
+
 
     def error(self,bot, update, error):
         """Log Errors caused by Updates."""
